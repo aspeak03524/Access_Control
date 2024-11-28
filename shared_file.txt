@@ -1,0 +1,133 @@
+Test Vboxuser
+Test from test
+
+Linux script from Lab:-
+
+vboxuser@Ubuntu2 ~ % sudo chrgp new_group amy_terry
+sudo: chrgp: command not found
+vboxuser@Ubuntu2 ~ % sudo chgrp new_group /home/vboxuser
+vboxuser@Ubuntu2 ~ % sudo usermod -aG new_group amy_terry
+vboxuser@Ubuntu2 ~ % sudo usermod -aG new_group Oliver_Terry
+vboxuser@Ubuntu2 ~ % sudo usermod new_group test
+Usage: usermod [options] LOGIN
+
+Options:
+  -a, --append                  append the user to the supplemental GROUPS
+                                mentioned by the -G option without removing
+                                the user from other groups
+  -b, --badname                 allow bad names
+  -c, --comment COMMENT         new value of the GECOS field
+  -d, --home HOME_DIR           new home directory for the user account
+  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE
+  -f, --inactive INACTIVE       set password inactive after expiration
+                                to INACTIVE
+  -g, --gid GROUP               force use GROUP as new primary group
+  -G, --groups GROUPS           new list of supplementary GROUPS
+  -h, --help                    display this help message and exit
+  -l, --login NEW_LOGIN         new value of the login name
+  -L, --lock                    lock the user account
+  -m, --move-home               move contents of the home directory to the
+                                new location (use only with -d)
+  -o, --non-unique              allow using duplicate (non-unique) UID
+  -p, --password PASSWORD       use encrypted password for the new password
+  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/* files
+  -r, --remove                  remove the user from only the supplemental GROUPS
+                                mentioned by the -G option without removing
+                                the user from other groups
+  -R, --root CHROOT_DIR         directory to chroot into
+  -s, --shell SHELL             new login shell for the user account
+  -u, --uid UID                 new UID for the user account
+  -U, --unlock                  unlock the user account
+  -v, --add-subuids FIRST-LAST  add range of subordinate uids
+  -V, --del-subuids FIRST-LAST  remove range of subordinate uids
+  -w, --add-subgids FIRST-LAST  add range of subordinate gids
+  -W, --del-subgids FIRST-LAST  remove range of subordinate gids
+  -Z, --selinux-user SEUSER     new SELinux user mapping for the user account
+
+vboxuser@Ubuntu2 ~ % sudo usermod -aG new_group test
+usermod: user 'test' does not exist
+vboxuser@Ubuntu2 ~ % sudo useradd test
+vboxuser@Ubuntu2 ~ % sudo usermod .aG new_group test
+Usage: usermod [options] LOGIN
+
+Options:
+  -a, --append                  append the user to the supplemental GROUPS
+                                mentioned by the -G option without removing
+                                the user from other groups
+  -b, --badname                 allow bad names
+  -c, --comment COMMENT         new value of the GECOS field
+  -d, --home HOME_DIR           new home directory for the user account
+  -e, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE
+  -f, --inactive INACTIVE       set password inactive after expiration
+                                to INACTIVE
+  -g, --gid GROUP               force use GROUP as new primary group
+  -G, --groups GROUPS           new list of supplementary GROUPS
+  -h, --help                    display this help message and exit
+  -l, --login NEW_LOGIN         new value of the login name
+  -L, --lock                    lock the user account
+  -m, --move-home               move contents of the home directory to the
+                                new location (use only with -d)
+  -o, --non-unique              allow using duplicate (non-unique) UID
+  -p, --password PASSWORD       use encrypted password for the new password
+  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/* files
+  -r, --remove                  remove the user from only the supplemental GROUPS
+                                mentioned by the -G option without removing
+                                the user from other groups
+  -R, --root CHROOT_DIR         directory to chroot into
+  -s, --shell SHELL             new login shell for the user account
+  -u, --uid UID                 new UID for the user account
+  -U, --unlock                  unlock the user account
+  -v, --add-subuids FIRST-LAST  add range of subordinate uids
+  -V, --del-subuids FIRST-LAST  remove range of subordinate uids
+  -w, --add-subgids FIRST-LAST  add range of subordinate gids
+  -W, --del-subgids FIRST-LAST  remove range of subordinate gids
+  -Z, --selinux-user SEUSER     new SELinux user mapping for the user account
+
+vboxuser@Ubuntu2 ~ % sudo usermod -aG new_group test
+vboxuser@Ubuntu2 ~ % sudo chmod 770 /home/vboxuser
+vboxuser@Ubuntu2 ~ % touch /home/vboxuser/shared_file.txt
+vboxuser@Ubuntu2 ~ % sudo chgrp new_group /home/vboxuser/shared_file.txt
+vboxuser@Ubuntu2 ~ % sudo chmod 660 /home/vboxuser/shared_file
+chmod: cannot access '/home/vboxuser/shared_file': No such file or directory
+vboxuser@Ubuntu2 ~ % sudo chmod 660 /home/vboxuser/shared_file.txt
+vboxuser@Ubuntu2 ~ % ls -ld /home/vboxuser
+drwxrwx--- 28 vboxuser new_group 4096 Nov 28 07:30 /home/vboxuser
+vboxuser@Ubuntu2 ~ % ls -l /home/vboxuser/shared_file.txt
+-rw-rw---- 1 vboxuser new_group 0 Nov 28 07:28 /home/vboxuser/shared_file.txt
+vboxuser@Ubuntu2 ~ % echo "Test Vboxuser" > /home/vboxuser/shared_file.txt
+vboxuser@Ubuntu2 ~ % su - test
+Password: 
+su: Authentication failure
+vboxuser@Ubuntu2 ~ % su - amt_terry
+su: user amt_terry does not exist or the user entry does not contain all the required fields
+vboxuser@Ubuntu2 ~ % su - amy_terry
+Password: 
+su: Authentication failure
+vboxuser@Ubuntu2 ~ % su - amy_terry
+Password: 
+su: Authentication failure
+vboxuser@Ubuntu2 ~ % su - Oliver_Terry 
+Password: 
+su: Authentication failure
+vboxuser@Ubuntu2 ~ % sudo passwd test  
+New password: 
+BAD PASSWORD: The password fails the dictionary check - it is based on a dictionary word
+Retype new password: 
+Sorry, passwords do not match.
+New password: 
+BAD PASSWORD: The password fails the dictionary check - it is based on a dictionary word
+Retype new password: 
+Sorry, passwords do not match.
+New password: 
+Retype new password: 
+passwd: password updated successfully
+vboxuser@Ubuntu2 ~ % su - test
+Password: 
+su: warning: cannot change directory to /home/test: No such file or directory
+$ echo "Test from test" >> /home/vboxuser/shared_file.txt
+$ cat /home/vboxuser/shared_file.txt
+Test Vboxuser
+Test from test
+$ su - vboxuser
+Password: 
+vboxuser@Ubuntu2 ~ % 
